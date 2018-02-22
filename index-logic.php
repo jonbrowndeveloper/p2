@@ -1,14 +1,24 @@
 <?php
 
-require 'Form.php';
-require 'TextBody.php';
-
 use DWA\Form;
 use P2\TextBody;
 
-$haveResults = false;
-$text = isset($_POST['inputTextArea']) ? $_POST['inputTextArea'] : '';
-$alphabetical = isset($_POST['optionRadios']) ? true : false;
+#TODO - REMOVE DUMP METHOD BEFORE RELEASE
 
-echo $text;
-echo $alphabetical;
+function dump($mixed = null)
+{
+    echo '<pre>';
+    var_dump($mixed);
+    echo '</pre>';
+}
+
+$form = new Form($_POST);
+
+$haveResults = false;
+$inputText = $form->get('inputTextArea', '');
+$numberOfWords = $form->get('numberOfWords');
+$finalText = '';
+
+$textBody = new TextBody($inputText, $form->has('alphabeticalCheck'));
+
+dump($textBody);

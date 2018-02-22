@@ -11,7 +11,7 @@ namespace P2;
 
     public function __construct($textInput, $alphabetical)
     {
-        $this->textArray = str_split($textInput);
+        $this->textArray = explode(" ", $textInput);
 
         $this->isAphabetical = $alphabetical;
     }

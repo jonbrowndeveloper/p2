@@ -1,6 +1,6 @@
 <?php
-##require 'form.php';
-#require 'TextBody.php';
+require 'form.php';
+require 'TextBody.php';
 require 'index-logic.php';
 ?>
 
@@ -33,24 +33,34 @@ require 'index-logic.php';
     <div class='row'>
         <div class='col'>
 
-            <form>
+            <form method='POST' action='index.php'>
                 <div class="form-group">
                     <label for="inputTextArea">Input</label>
-                    <textarea class="form-control" id="inputTextArea" rows="16"></textarea>
+                    <textarea class="form-control" name='inputTextArea' id="inputTextArea" rows="16"><?php echo $inputText ?></textarea>
                     <p id="passwordHelpBlock" class="form-text text-muted">
-                        Paste in any text that contains letters and numbers that is under 250 words long.
+                        Paste in any text that contains letters and numbers that is under 250 words.
                     </p>
                 </div>
+                <label>
+                    <input type='checkbox' name='alphabeticalCheck' value='1' <?= ($alphabetical) ? 'checked' : '' ?>>
+                    Alphabetical
+                </label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionRadios" id="optionRadios1" value="false" checked>
+                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="10" checked>
                     <label class="form-check-label" for="optionRadios1">
-                        Show my text in its default order
+                        10 most important words
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="optionRadios" id="optionRadios1" value="true">
+                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="25">
                     <label class="form-check-label" for="optionRadios1">
-                        Show my text in alphabetical order
+                        25 most important words
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="50">
+                    <label class="form-check-label" for="optionRadios1">
+                        50 most important words
                     </label>
                 </div>
                 <br>
@@ -63,7 +73,7 @@ require 'index-logic.php';
             <?php if ($haveResults): ?>
                 <div class="form-group">
                     <label for="outputTextArea">Output</label>
-                    <textarea class="form-control" id="outputTextArea" rows="16" readonly></textarea>
+                    <textarea class="form-control" id="outputTextArea" rows="16" readonly><?= $finalText ?></textarea>
                 </div>
             <?php elseif (!$haveResults): ?>
                 <div class="form-group">
