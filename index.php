@@ -60,13 +60,22 @@ require 'index-logic.php';
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="25">
+                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="25"
+                        <?php if ($numberOfWords == 25) : ?>
+                            <?php echo "checked" ?>
+                        <?php endif; ?>>
                     <label class="form-check-label" for="optionRadios1">
                         25 most important words
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="50">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="numberOfWords"
+                           id="numberOfWords"
+                           value="50" <?php if ($numberOfWords == 50) : ?>
+                        <?php echo "checked" ?>
+                    <?php endif; ?>>
                     <label class="form-check-label" for="optionRadios1">
                         50 most important words
                     </label>
@@ -95,21 +104,18 @@ require 'index-logic.php';
 
         <div class='col'>
             <?php if ($haveResults): ?>
-                <div class="form-group">
-                    <label for="outputTextArea">Output</label>
-                    <textarea class="form-control"
-                              id="outputTextArea"
-                              rows="16"
-                              readonly><?= print_r(implode(' ', $textBody->uniqueWords)) ?></textarea>
+                <br>
+                <div class="container">
+                    <?php foreach ($uniqueArrayFinal
+
+                    as $wordsFinals => $wordFinal) : ?>
+                    <span style='color:black;font-size:<?= $uniqueArrayFinal[$wordsFinals]['fontSize'] ?>px'><?= $uniqueArrayFinal[$wordsFinals]['word'] ?>
+                        <?php endforeach; ?>
                 </div>
-                <p class='text-center'><?= $form->numberOfWords ?> words</p>
             <?php elseif (!$haveResults): ?>
-                <div class="form-group">
-                    <label for="outputTextArea">Output</label>
-                    <textarea class="form-control"
-                              id="outputTextArea"
-                              rows="16"
-                              readonly>Your text will appear here...</textarea>
+                <br>
+                <div class="container">
+                    Your text will appear here...
                 </div>
             <?php endif; ?>
         </div>
