@@ -1,7 +1,11 @@
 <?php
 
-use DWA\Form;
-use P2\TextBody;
+require 'TextBody.php';
+require 'Form.php';
+require 'ValidationForm.php';
+
+use JB\ValidationForm;
+use JB\TextBody;
 
 #TODO - REMOVE DUMP METHOD BEFORE RELEASE
 
@@ -12,13 +16,38 @@ function dump($mixed = null)
     echo '</pre>';
 }
 
-$form = new Form($_POST);
+$form = new ValidationForm($_POST);
 
 $haveResults = false;
 $inputText = $form->get('inputTextArea', '');
+$alphabetical = $form->has('alphabeticalCheck');
+
+# for display use
+
 $numberOfWords = $form->get('numberOfWords');
-$finalText = '';
 
-$textBody = new TextBody($inputText, $form->has('alphabeticalCheck'));
+# Form Validation
 
-dump($textBody);
+if ($form->isSubmitted()) {
+    $errors = $form->validate(
+        [
+            'inputTextArea' => 'required|alphaNumeric|under500',
+        ]
+    );
+
+    if (!$form->hasErrors) {
+        $haveResults = true;
+    }
+}
+
+# Text Body logic
+
+$textBody = new TextBody($inputText, $alphabetical);
+
+$importanceArray
+
+foreach ($textBody->uniqueWords as $words => $uniqueWord) {
+    foreach ($inputText as $inputWords => $inputWord) {
+        if ()
+    }
+}

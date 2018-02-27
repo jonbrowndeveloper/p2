@@ -1,19 +1,28 @@
 <?php
 
-namespace P2;
+namespace JB;
 
- class TextBody
+class TextBody
 {
-    private $textArray;
-    private $isAphabetical = false;
+    # class takes text input and then pulls out a predetermined amount of unique words
 
-    ## Form Validation
+    public $textArray;
+    public $isAlphabetical = false;
+    public $uniqueWords;
+
+    # construct gets text input and alphabetical boolean
 
     public function __construct($textInput, $alphabetical)
     {
         $this->textArray = explode(" ", $textInput);
 
-        $this->isAphabetical = $alphabetical;
-    }
+        $this->isAlphabetical = $alphabetical;
 
+        $this->uniqueWords = array_unique($this->textArray);
+
+        if ($alphabetical)
+        {
+            sort($this->uniqueWords);
+        }
+    }
 }

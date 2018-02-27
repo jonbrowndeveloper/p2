@@ -1,6 +1,4 @@
 <?php
-require 'form.php';
-require 'TextBody.php';
 require 'index-logic.php';
 ?>
 
@@ -23,9 +21,9 @@ require 'index-logic.php';
 
 <div class='container-fluid'>
 
-    <h1 class='text-center'>Word Perspective!</h1>
+    <h1 class='text-center'>Word Perspective</h1>
 
-    <h4 class='text-center'>show the most important words</h4>
+    <h4 class='text-center'>a word cloud of important words</h4>
 
 </div>
 
@@ -33,12 +31,17 @@ require 'index-logic.php';
     <div class='row'>
         <div class='col'>
 
+            <!-- Input text area -->
+
             <form method='POST' action='index.php'>
                 <div class="form-group">
                     <label for="inputTextArea">Input</label>
-                    <textarea class="form-control" name='inputTextArea' id="inputTextArea" rows="16"><?php echo $inputText ?></textarea>
+                    <textarea class="form-control"
+                              name='inputTextArea'
+                              id="inputTextArea"
+                              rows="16"><?php echo $inputText ?></textarea>
                     <p id="passwordHelpBlock" class="form-text text-muted">
-                        Paste in any text that contains letters and numbers that is under 250 words.
+                        Paste in any text that contains letters and numbers that is under 500 words.
                     </p>
                 </div>
                 <label>
@@ -46,7 +49,12 @@ require 'index-logic.php';
                     Alphabetical
                 </label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="10" checked>
+                    <input class="form-check-input"
+                           type="radio"
+                           name="numberOfWords"
+                           id="numberOfWords"
+                           value="10"
+                           checked>
                     <label class="form-check-label" for="optionRadios1">
                         10 most important words
                     </label>
@@ -68,21 +76,42 @@ require 'index-logic.php';
                     <button type="submit" class="btn btn-primary">Go!</button>
                 </div>
             </form>
+
+            <!-- Display errors after posting below input text area -->
+
+            <?php if ($form->hasErrors) : ?>
+                <div class='alert-danger'>
+                    <ul>
+                        <?php foreach ($errors as $error) : ?>
+                            <li><?= $error ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
         </div>
+
+        <!-- Output text area -->
+
         <div class='col'>
             <?php if ($haveResults): ?>
                 <div class="form-group">
                     <label for="outputTextArea">Output</label>
-                    <textarea class="form-control" id="outputTextArea" rows="16" readonly><?= $finalText ?></textarea>
+                    <textarea class="form-control"
+                              id="outputTextArea"
+                              rows="16"
+                              readonly><?= print_r(implode(' ', $textBody->uniqueWords)) ?></textarea>
                 </div>
+                <p class='text-center'><?= $form->numberOfWords ?> words</p>
             <?php elseif (!$haveResults): ?>
                 <div class="form-group">
                     <label for="outputTextArea">Output</label>
-                    <textarea class="form-control" id="outputTextArea" rows="16" readonly>Your text will appear here...</textarea>
+                    <textarea class="form-control"
+                              id="outputTextArea"
+                              rows="16"
+                              readonly>Your text will appear here...</textarea>
                 </div>
             <?php endif; ?>
-
-
         </div>
     </div>
 </div>

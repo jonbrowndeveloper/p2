@@ -1,5 +1,6 @@
 <?php
 namespace DWA;
+
 class Form
 {
     /**
@@ -127,7 +128,10 @@ class Form
                 $test = $this->$rule($value, $parameter);
                 # Test failed
                 if (!$test) {
-                    $errors[] = 'The field ' . $fieldName . $this->getErrorMessage($rule, $parameter);
+                    $errors[] = $this->getErrorMessage($rule, $parameter);
+
+                    # I changed this statement because I figured showing the field name was unnecessary for the user
+                    # $errors[] = 'The field ' . $fieldName . $this->getErrorMessage($rule, $parameter);
                     # Only indicate one error per field
                     break;
                 }
@@ -157,6 +161,8 @@ class Form
             'email' => ' is not a valid email address.',
             'min' => ' has to be greater than ' . $parameter . '.',
             'max' => ' has to be less than ' . $parameter . '.',
+            'under500' => ' has to be less than 500 words '
+
         ];
         # If a message for the rule was found, use that, otherwise default to " has an error"
         $message = isset($language[$rule]) ? $language[$rule] : ' has an error.';
