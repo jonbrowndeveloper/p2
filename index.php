@@ -37,7 +37,7 @@ require 'index-logic.php';
                 <div class="form-group">
                     <label for="inputTextArea">Input</label>
                     <textarea class="form-control"
-                              name='inputTextArea'
+                              name='inputTextArea' id='inputTextArea'
                               rows="16"><?php echo $inputText ?></textarea>
                     <p id="passwordHelpBlock" class="form-text text-muted">
                         Paste in any text that contains letters and numbers that is under 500 words.
