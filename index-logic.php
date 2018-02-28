@@ -7,22 +7,13 @@ require 'ValidationForm.php';
 use JB\ValidationForm;
 use JB\TextBody;
 
-#TODO - REMOVE DUMP METHOD BEFORE RELEASE
-
-function dump($mixed = null)
-{
-    echo '<pre>';
-    var_dump($mixed);
-    echo '</pre>';
-}
-
 $form = new ValidationForm($_POST);
 
 $haveResults = false;
 $inputText = $form->get('inputTextArea', '');
 $alphabetical = $form->has('alphabeticalCheck');
 
-# for display use
+// for display use
 
 $numberOfWords = $form->get('numberOfWords');
 
@@ -36,6 +27,8 @@ if ($form->isSubmitted()) {
     );
 
     if (!$form->hasErrors) {
+        $form->sanitize($inputText);
+
         $haveResults = true;
     }
 }
@@ -112,4 +105,17 @@ foreach ($textBody->uniqueWords as $uniqueWordsFE => $uniqueWordFE) {
             }
         }
     }
+}
+
+// another custom usort function used to sort the final array
+
+function stringCompare($a, $b)
+{
+    return strcasecmp($a['word'], $b['word']);
+}
+
+// sort alphabetically if needed
+
+if ($alphabetical) {
+    usort($uniqueArrayFinal, "stringCompare");
 }

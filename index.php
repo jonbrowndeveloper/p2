@@ -38,7 +38,6 @@ require 'index-logic.php';
                     <label for="inputTextArea">Input</label>
                     <textarea class="form-control"
                               name='inputTextArea'
-                              id="inputTextArea"
                               rows="16"><?php echo $inputText ?></textarea>
                     <p id="passwordHelpBlock" class="form-text text-muted">
                         Paste in any text that contains letters and numbers that is under 500 words.
@@ -52,19 +51,18 @@ require 'index-logic.php';
                     <input class="form-check-input"
                            type="radio"
                            name="numberOfWords"
-                           id="numberOfWords"
                            value="10"
                            checked>
-                    <label class="form-check-label" for="optionRadios1">
+                    <label class="form-check-label">
                         10 most important words
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="numberOfWords" id="numberOfWords" value="25"
+                    <input class="form-check-input" type="radio" name="numberOfWords" value="25"
                         <?php if ($numberOfWords == 25) : ?>
                             <?php echo "checked" ?>
                         <?php endif; ?>>
-                    <label class="form-check-label" for="optionRadios1">
+                    <label class="form-check-label">
                         25 most important words
                     </label>
                 </div>
@@ -72,11 +70,10 @@ require 'index-logic.php';
                     <input class="form-check-input"
                            type="radio"
                            name="numberOfWords"
-                           id="numberOfWords"
                            value="50" <?php if ($numberOfWords == 50) : ?>
                         <?php echo "checked" ?>
                     <?php endif; ?>>
-                    <label class="form-check-label" for="optionRadios1">
+                    <label class="form-check-label">
                         50 most important words
                     </label>
                 </div>

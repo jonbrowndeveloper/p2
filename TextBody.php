@@ -2,6 +2,8 @@
 
 namespace JB;
 
+use DWA\Form;
+
 class TextBody
 {
     # class takes text input and then pulls out a predetermined amount of unique words
@@ -19,10 +21,5 @@ class TextBody
         $this->isAlphabetical = $alphabetical;
 
         $this->uniqueWords = array_unique($this->textArray);
-
-        if ($alphabetical)
-        {
-            sort($this->uniqueWords);
-        }
     }
 }
